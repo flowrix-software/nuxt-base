@@ -6,7 +6,7 @@
       "esModuleInterop": true,
       "strict": true,
       "declaration": true,
-      "types": ["@types/node"]
+      "types": ["@types/node", "nuxt"]
     },
     "include": ["src"]
   }

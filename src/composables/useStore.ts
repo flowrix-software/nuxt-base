@@ -1,3 +1,5 @@
+import { useRuntimeConfig, useFetch } from 'nuxt/app'
+
 export const useStore = () => {
     const config = useRuntimeConfig()
 
