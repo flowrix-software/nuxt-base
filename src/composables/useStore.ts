@@ -1,4 +1,4 @@
-import { useRuntimeConfig, useFetch } from 'nuxt/app'
+// import { useRuntimeConfig, useFetch } from 'nuxt/app'
 
 export const useStore = () => {
     const config = useRuntimeConfig()
@@ -16,13 +16,13 @@ export const useStore = () => {
 
 
     const getProductBySlug = async (slug: string) => {
-        const { data } = await useFetch(`${config.public.apiBase}product/${slug}`, {
+        const { data } = await $fetch(`${config.public.apiBase}product/${slug}`, {
             headers: {
                 'x-api-key': config.public.apiKey,
                 'x-api-secret': config.public.apiSecret,
                 'Origin':  config.public.apiOrigin,
             },
-            key: `products-${slug}`, // Add unique cache key
+            key: `product-${slug}`, // Add unique cache key
             server: true,
         })
         return data.value
