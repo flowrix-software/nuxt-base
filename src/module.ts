@@ -1,16 +1,25 @@
-import { defineNuxtModule, addImportsDir, createResolver, addServerScanDir } from '@nuxt/kit'
+import { defineNuxtModule, addServerScanDir, addImportsDir, createResolver } from '@nuxt/kit'
 
-export default defineNuxtModule({
+// Module options TypeScript interface definition
+export interface ModuleOptions {
+  apiKey: string
+  apiSecret: string
+  apiOrigin: string
+}
+
+export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: 'nuxt-base',
-    configKey: 'ecommerce'
+    configKey: 'myModule',
   },
-  setup(_options, nuxt) {
+  // Default configuration options of the Nuxt module
+  defaults: {},
+  setup(_options, _nuxt) {
     const resolver = createResolver(import.meta.url)
-    
-    // Add composables directory
+
+    // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
+    // addPlugin(resolver.resolve('./runtime/plugin'))
     addImportsDir(resolver.resolve('composables'))
-    // Add a server route
-    addServerScanDir(resolver.resolve('server'))
-  }
+    addServerScanDir(resolver.resolve('./runtime/server'))
+  },
 })
